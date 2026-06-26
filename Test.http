@@ -1,0 +1,62 @@
+### Health Check - Go API
+GET http://localhost:8080/health
+
+### Health Check - Node.js API
+GET http://localhost:3001/health
+
+### QR Factorization - Complete (with statistics)
+POST http://localhost:8080/api/qr-factorization
+Content-Type: application/json
+
+{
+  "matrix": [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    [10, 11, 12]
+  ]
+}
+
+### QR Factorization - Simple 2x2
+POST http://localhost:8080/api/qr-factorization
+Content-Type: application/json
+
+{
+  "matrix": [
+    [1, 2],
+    [3, 4]
+  ]
+}
+
+### QR Factorization - Diagonal Matrix
+POST http://localhost:8080/api/qr-factorization
+Content-Type: application/json
+
+{
+  "matrix": [
+    [5, 0, 0],
+    [0, 3, 0],
+    [0, 0, 7]
+  ]
+}
+
+### QR Only (without statistics)
+POST http://localhost:8080/api/qr-only
+Content-Type: application/json
+
+{
+  "matrix": [
+    [1, 2],
+    [3, 4],
+    [5, 6]
+  ]
+}
+
+### Statistics Only (Node.js API)
+POST http://localhost:3001/api/statistics
+Content-Type: application/json
+
+{
+  "q": [[1, 2], [3, 4]],
+  "r": [[5, 6], [7, 8]]
+}

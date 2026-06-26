@@ -1,0 +1,90 @@
+version: '3.8'
+
+services:
+  # API en Go - Factorización QR
+  go-api:
+    build:
+      context: ./go-api
+      dockerfile: Dockerfile
+    container_name: interseguro-go-api
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - NODE_API_URL=http://node-api:3000/api/statistics
+    networks:
+      - interseguro-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # API en Node.js - Estadísticas
+  node-api:
+    build:
+      context: ./node-api
+      dockerfile: Dockerfile
+    container_name: interseguro-node-api
+    ports:
+      - "3001:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+    networks:
+      - interseguro-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend React
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: interseguro-frontend
+    ports:
+      - "3002:80"
+    environment:
+      - REACT_APP_GO_API_URL=http://localhost:8080
+      - REACT_APP_NODE_API_URL=http://localhost:3001
+    networks:
+      - interseguro-network
+    depends_on:
+      - go-api
+      - node-api
+    restart: unless-stopped
+
+  # Go API Tests (solo para desarrollo)
+  go-api-test:
+    image: golang:1.21-alpine
+    container_name: interseguro-go-api-test
+    working_dir: /app
+    volumes:
+      - ./go-api:/app
+    command: sh -c "go mod tidy && go test -v -cover"
+    profiles:
+      - test
+
+  # Node.js API Tests (solo para desarrollo)
+  node-api-test:
+    image: node:18-alpine
+    container_name: interseguro-node-api-test
+    working_dir: /app
+    volumes:
+      - ./node-api:/app
+    command: sh -c "npm install && npm test -- --coverage"
+    profiles:
+      - test
+
+# Red personalizada para comunicación entre servicios
+networks:
+  interseguro-network:
+    driver: bridge
+    name: interseguro-network

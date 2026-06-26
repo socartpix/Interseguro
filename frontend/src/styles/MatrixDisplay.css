@@ -1,0 +1,128 @@
+.matrix-display {
+  background: white;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+.matrix-display.highlight {
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
+}
+
+.matrix-display h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.matrix-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius);
+  overflow-x: auto;
+}
+
+.matrix-bracket {
+  font-size: 3rem;
+  font-weight: 100;
+  color: var(--primary-color);
+  line-height: 1;
+}
+
+.matrix-bracket.left {
+  transform: scaleX(0.5);
+}
+
+.matrix-bracket.right {
+  transform: scaleX(0.5);
+}
+
+.matrix-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.matrix-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.matrix-display .matrix-cell {
+  min-width: 80px;
+  padding: 0.75rem;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+  text-align: right;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.matrix-display .matrix-cell:hover {
+  background: var(--bg-tertiary);
+  transform: scale(1.05);
+  box-shadow: var(--shadow-sm);
+}
+
+.matrix-info {
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Animación de entrada */
+.matrix-display {
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .matrix-display .matrix-cell {
+    min-width: 70px;
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+  
+  .matrix-bracket {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .matrix-display .matrix-cell {
+    min-width: 60px;
+    padding: 0.4rem;
+    font-size: 0.8rem;
+  }
+  
+  .matrix-bracket {
+    font-size: 2rem;
+  }
+  
+  .matrix-wrapper {
+    padding: 0.5rem;
+  }
+}

@@ -1,0 +1,4 @@
+pass
+node_modules/
+coverage/
+*.sum

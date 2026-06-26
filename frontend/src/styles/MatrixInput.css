@@ -1,0 +1,220 @@
+.matrix-input-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.matrix-input-container h2 {
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+/* Dimension Controls */
+.dimension-controls {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+}
+
+.dimension-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.dimension-controls input {
+  width: 100px;
+  padding: 0.5rem;
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.dimension-controls input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Examples */
+.examples {
+  background: var(--bg-secondary);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.examples p {
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.examples button {
+  background: white;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  margin: 0.25rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.examples button:hover:not(:disabled) {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.examples button.clear-btn {
+  border-color: var(--error-color);
+  color: var(--error-color);
+}
+
+.examples button.clear-btn:hover:not(:disabled) {
+  background: var(--error-color);
+  color: white;
+}
+
+.examples button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Matrix Grid */
+.matrix-grid {
+  display: grid;
+  gap: 0.5rem;
+  margin: 2rem 0;
+  justify-content: center;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius);
+}
+
+.matrix-cell {
+  width: 70px;
+  height: 70px;
+  padding: 0.5rem;
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.matrix-cell:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  transform: scale(1.05);
+}
+
+.matrix-cell:disabled {
+  background: var(--bg-tertiary);
+  cursor: not-allowed;
+}
+
+/* Error Message */
+.error-message {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--error-color);
+  margin: 1rem 0;
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: var(--border-radius);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-lg);
+  margin-top: 1rem;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Info Box */
+.info-box {
+  background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+  border-left: 4px solid #3b82f6;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  margin-top: 1.5rem;
+}
+
+.info-box p {
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dimension-controls {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .dimension-controls label {
+    align-items: center;
+  }
+  
+  .examples button {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .matrix-cell {
+    width: 60px;
+    height: 60px;
+    font-size: 0.9rem;
+  }
+  
+  .matrix-grid {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .matrix-cell {
+    width: 50px;
+    height: 50px;
+    font-size: 0.85rem;
+  }
+}
